@@ -7,3 +7,8 @@ release/
 *.dot
 *.log
 *.ign
+.envrc
+.terraform
+.terraform*
+*.tfstate
+*.tfstate.backup

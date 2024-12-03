@@ -1,0 +1,7 @@
+#cloud-config
+packages:
+  - git
+bootcmd:
+  - [ cloud-init-per, once, goinstall, curl, "-sS", https://webi.sh/golang, "|", sh]
+  - [ cloud-init-per, once, chanclone, cd, &&, git, clone, https://github.com/chancoin-org/chancoin ]
+  - [ cloud-init-per, once, chanbuild, cd, &&, cd, chancoin, make, install ]
