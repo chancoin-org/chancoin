@@ -1,28 +1,74 @@
 version: 1
 validation: sovereign
-accounts: 
+metadata:
+  base_denom: "chan"
+  description: "The native staking token of the chain"
+  display: "CHAN"
+  name: "Chan Token"
+  symbol: "CHAN"
+  denom_units:
+    - denom: "chan"
+      exponent: 0
+    - denom: "mchan"
+      exponent: 3
+    - denom: "uchan"
+      exponent: 6
+accounts:
 - name: alice
   coins:
-  - 20000token
-  - 200000000stake
+  - 200000000chan
 - name: bob
   coins:
-  - 10000token
-  - 100000000stake
+  - 100000000chan
 client:
   openapi:
     path: docs/static/openapi.yml
 faucet:
   name: bob
   coins:
-  - 5token
-  - 100000stake
+  - 100000chan
+genesis:
+  app_state:
+    staking:
+      params:
+        bond_denom: "chan"
+    crisis:
+      constant_fee:
+        denom: "chan"
+    mint:
+      params:
+        mint_denom: "chan"
+    gov:
+      deposit_params:
+        min_deposit:
+          - amount: "100000"
+            denom: "chan"
+    bank:
+      denom_metadata:
+         - base: "chan"
+           display: "chan"
+           name: "Chancoin"
+           symbol: "CHAN"
+           description: "The native staking token of the chain"
+           denom_units:
+             - denom: "chan"
+               exponent: 0
+               aliases: []
+             - denom: "mchan"
+               exponent: 3
+               aliases: []
+             - denom: "uchan"
+               exponent: 6
+               aliases: []
+      send_enabled:
+        - denom: "chan"
+          enabled: true
 validators:
 - name: alice
-  bonded: 100000000stake
+  bonded: 100000000chan
 - name: validator1
-  bonded: 100000000stake
+  bonded: 100000000chan
 - name: validator2
-  bonded: 200000000stake
+  bonded: 200000000chan
 - name: validator3
-  bonded: 300000000stake
+  bonded: 300000000chan

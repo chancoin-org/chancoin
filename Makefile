@@ -1,6 +1,7 @@
-BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+>BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 COMMIT := $(shell git log -1 --format='%H')
 APPNAME := chancoin
+TESTNET_ID := testnet-1
 
 # don't override user values
 ifeq (,$(VERSION))
@@ -107,3 +108,11 @@ govulncheck:
 	@govulncheck ./...
 
 .PHONY: govet govulncheck
+
+################
+###  Custom  ###
+################
+
+.PHONY: init-testnet-genesis
+init-testnet-genesis:
+	@$(APPNAME)d init `cat /etc/hostname` -o --chain-id chancoin-$(TESTNET_ID) --default-denom chan
